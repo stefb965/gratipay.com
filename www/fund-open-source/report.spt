@@ -1,0 +1,9 @@
+[---]
+suppress_sidebar = True
+title = _("Your Open Source Inventory Report")
+[---] text/html
+{% extends "templates/base.html" %}
+
+{% block content %}
+Here it is ... almost!
+{% endblock %}
