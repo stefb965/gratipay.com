@@ -2,6 +2,7 @@ from collections import OrderedDict
 [---]
 title = _("Fund Open Source")
 suppress_sidebar = True
+page_id = 'fund-open-source'
 [---]
 {% extends "templates/base.html" %}
 {% block head_early %}
@@ -26,11 +27,13 @@ suppress_sidebar = True
 
 <h2>Step 1: Analyze Your Code</h2>
 
-<p>{{ _("Paste the URL of your GitHub repo. We'll show you a report of all your open source dependencies (along with their licenses).") }}</p>
+<p>{{ _("Copy and paste your <code>requirements.txt</code>, and we'll show you a report of all your open source dependencies, along with their licenses." | safe) }}</p>
+
+<p>{{ _("Want to test it out? Use the <a href='https://raw.githubusercontent.com/rtfd/readthedocs.org/master/requirements/pip.txt'><code>requirements.txt</code> from Read the Docs.</a>"|safe) }}</p>
 
 <form action="/fund-open-source/report" method="POST">
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
-    <input type="text" value="https://github.com/gratipay/gratipay.com/">
+    <textarea name="requirements" autofocus></textarea>
     <button style="selected larger">{{ _("Go") }}</button>
 </form>
 {% endblock %}
