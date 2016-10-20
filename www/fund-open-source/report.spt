@@ -1,9 +1,21 @@
+from aspen import Response
+from gratipay import librariesio
 [---]
+if request.method != 'POST':
+    website.redirect('/fund-open-source/')
+
+package_json = request.body['package_json']
+tree = librariesio.resolve(package_json)
 suppress_sidebar = True
-title = _("Your Open Source Inventory Report")
+title = _("Your Open Source Inventory")
 [---] text/html
 {% extends "templates/base.html" %}
 
 {% block content %}
-Here it is ... almost!
+
+<h2>Step 2: Review Inventory and Set Amount</h2>
+
+$<input type="amount" value="1,000"> per week <button class="selected larger">Go</button>
+
+{{ tree | safe }}
 {% endblock %}
