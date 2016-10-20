@@ -18,7 +18,11 @@ page_id = 'fund-open-source'
 
 <h2>{{ _("Step 2: Review Inventory and Set Amount") }}</h2>
 
-$<input type="amount" value="1,000"> per week <button class="selected larger">Go</button>
+<form class="call-to-action">
+    $<input type="amount" value="1,000">
+    <span class="per-week">per week</span>
+    <button class="selected larger">Go</button>
+</form>
 
 <ul class="libraries">
     {% for name in names %}

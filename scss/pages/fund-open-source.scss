@@ -9,9 +9,25 @@
         }
     }
 
+    .call-to-action {
+        border: 1px solid $gray;
+        border-style: solid none;
+        padding: 10px 0;
+        text-align: center;
+        font: bold 28px/40px $Ideal;
+        input {
+            width: 120px;
+        }
+        button {
+            font: normal 22px/40px $Ideal;
+            padding: 2px 28px;
+        }
+        .per-week {
+            font: normal 22px/40px $Ideal;
+        }
+    }
+
     .libraries {
-        margin-top: 10px;
-        border-top: 1px;
         font: normal 8pt/13pt $Mono;
 
         li {
