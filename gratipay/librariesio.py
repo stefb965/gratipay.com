@@ -5,7 +5,7 @@ import requests
 import json
 
 
-def extract_tree_snippet(full):
+def extract_package_names(full):
     lines = full.splitlines()
     start = 0
     end = -1
@@ -15,8 +15,7 @@ def extract_tree_snippet(full):
         elif line.startswith('<ins class="adsbygoogle"'):
             end = i
     part = '\n'.join(lines[start:end-1])
-    part = re.sub('href="', 'href="/on', part)
-    return part
+    return sorted(set(re.findall(r'<a href="[^"]*">(.*)</a>', part)))
 
 
 def resolve(package_json):
@@ -27,6 +26,7 @@ def resolve(package_json):
     r = requests.get(url='http://libraries.io/npm/{name}/tree'.format(**package_json))
     if r.status_code == 200:
         # The package.json has a package name that also exists on npm. Assume this is that.
-        out = extract_tree_snippet(r.text)
+        names = extract_package_names(r.text)
+        names.remove(package_json['name'])
 
-    return out
+    return names

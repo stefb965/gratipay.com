@@ -5,9 +5,10 @@ if request.method != 'POST':
     website.redirect('/fund-open-source/')
 
 package_json = request.body['package_json']
-tree = librariesio.resolve(package_json)
+names = librariesio.resolve(package_json)
 suppress_sidebar = True
 title = _("Your Open Source Inventory")
+page_id = 'fund-open-source'
 [---] text/html
 {% extends "templates/base.html" %}
 
@@ -15,10 +16,14 @@ title = _("Your Open Source Inventory")
 
 <p><a href="https://libraries.io/">Powered by <img src="{{ website.asset('librariesio.svg') }}" height="24"></a></p>
 
-<h2>Step 2: Review Inventory and Set Amount</h2>
+<h2>{{ _("Step 2: Review Inventory and Set Amount") }}</h2>
 
 $<input type="amount" value="1,000"> per week <button class="selected larger">Go</button>
 
-{{ tree | safe }}
+<ul class="libraries">
+    {% for name in names %}
+    <li><a href="/on/npm/{{ name }}/">{{ name }}</a></li>
+    {% endfor %}
+</ul>
 
 {% endblock %}

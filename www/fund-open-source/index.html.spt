@@ -22,6 +22,8 @@ page_id = 'fund-open-source'
 
 <h2>{{ _("Step 1: Analyze Your Code") }}</h2>
 
+<p><a href="https://libraries.io/">Powered by <img src="{{ website.asset('librariesio.svg') }}" height="24"></a></p>
+
 <p>{{ _("Paste your <code>package.json</code> for a report of your open source dependencies and their licenses." | safe) }}</p>
 
 <p>{{ _( "Want a sample? Try the {a}<code>package.json</code> from npm itself{_a}"|safe
