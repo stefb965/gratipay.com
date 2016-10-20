@@ -13,9 +13,12 @@ title = _("Your Open Source Inventory")
 
 {% block content %}
 
+<p><a href="https://libraries.io/">Powered by <img src="{{ website.asset('librariesio.svg') }}" height="24"></a></p>
+
 <h2>Step 2: Review Inventory and Set Amount</h2>
 
 $<input type="amount" value="1,000"> per week <button class="selected larger">Go</button>
 
 {{ tree | safe }}
+
 {% endblock %}
