@@ -862,3 +862,29 @@ BEGIN;
         ) AS anon WHERE amount > 0;
 
 END;
+
+
+-- https://github.com/gratipay/gratipay.com/pull/4153
+BEGIN;
+
+    CREATE TABLE packages
+    ( id                bigserial   PRIMARY KEY
+    , package_manager   text        NOT NULL
+    , name              text        NOT NULL
+    , description       text        NOT NULL
+    , readme            text        NOT NULL DEFAULT ''
+    , readme_raw        text        NOT NULL DEFAULT ''
+    , readme_type       text        NOT NULL DEFAULT ''
+    , emails            text[]      NOT NULL
+    , UNIQUE (package_manager, name)
+     );
+
+END;
+
+
+-- https://github.com/gratipay/gratipay.com/pull/4159
+BEGIN;
+    ALTER TABLE packages ALTER COLUMN readme_raw DROP NOT NULL;
+    ALTER TABLE packages ALTER COLUMN readme_raw SET DEFAULT NULL;
+    UPDATE packages SET readme_raw=NULL;
+END;
