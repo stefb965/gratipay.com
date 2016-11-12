@@ -41,8 +41,14 @@ title = _("Suspicious Accounts")
     }
 </style>
 
-<h3>Suspicious Accounts (N = {{ len(suspicious) }})</h3>
-<table>
+<table class="table">
+<thead>
+            <tr>
+                <th>{{ _("~User") }}</th>
+                <th>{{ _("Giving") }}</th>
+                <th>{{ _("n") }}</th>
+            </tr>
+        </thead>
 {% for account in suspicious %}
     <tr data-username="{{ account.username }}">
         <td>
@@ -52,6 +58,13 @@ title = _("Suspicious Accounts")
         <td>{{ account.ngiving_to }}</td>
     </tr>
 {% endfor %}
+        <tfoot>
+            <tr>
+                <td>N = {{ len(suspicious) }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
 </table>
 
 {% endblock %}
