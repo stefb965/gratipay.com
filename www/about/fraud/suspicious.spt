@@ -46,7 +46,7 @@ title = _("Suspicious Accounts")
             <tr>
                 <th>{{ _("~User") }}</th>
                 <th>{{ _("Giving") }}</th>
-                <th>{{ _("n") }}</th>
+                <th>{{ _("nGiving") }}</th>
             </tr>
         </thead>
 {% for account in suspicious %}
