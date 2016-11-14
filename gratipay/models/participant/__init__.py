@@ -671,8 +671,8 @@ class Participant(Model, mixins.Identity):
               FROM current_exchange_routes r
              WHERE participant = %s
                AND network = 'bitcoin'
-               AND error <> 'invalidated'
-        """, (self.id,))
+               AND error <> %s
+        """, (self.id, ExchangeRoute.ERROR_INVALIDATED))
         return {r.network: r.address for r in routes}
 
     @property
