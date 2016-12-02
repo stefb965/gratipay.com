@@ -225,7 +225,8 @@ class TestTeams(Harness):
         self.make_participant('alice', claimed_time='now', email_address='', last_paypal_result='')
         self.post_new(dict( self.valid_data
                           , homepage='Http://gratipay.com/'
-                          , onboarding_url='http://INSIDE.GRATipay.com/'))
+                          , onboarding_url='http://INSIDE.GRATipay.com/'
+                           ))
         team = T('gratiteam')
         assert team.homepage == 'Http://gratipay.com/'
         assert team.onboarding_url == 'http://INSIDE.GRATipay.com/'
