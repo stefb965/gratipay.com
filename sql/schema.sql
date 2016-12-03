@@ -546,6 +546,7 @@ BEGIN;
     ALTER TABLE teams ALTER COLUMN getting_paid DROP NOT NULL;
 
     ALTER TABLE teams ADD COLUMN onboarding_url text NOT NULL DEFAULT '';
+    ALTER TABLE teams ADD COLUMN todo_url text NOT NULL DEFAULT '';
 
 END;
 
@@ -886,6 +887,12 @@ BEGIN;
     ALTER TABLE packages ALTER COLUMN readme_raw DROP NOT NULL;
     ALTER TABLE packages ALTER COLUMN readme_raw SET DEFAULT NULL;
     UPDATE packages SET readme_raw=NULL;
+END;
+
+
+--https://github.com/gratipay/gratipay.com/pull/4214
+BEGIN;
+  ALTER TABLE teams DROP COLUMN todo_url;
 END;
 
 
