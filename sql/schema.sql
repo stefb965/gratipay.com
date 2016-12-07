@@ -890,12 +890,6 @@ BEGIN;
 END;
 
 
---https://github.com/gratipay/gratipay.com/pull/4214
-BEGIN;
-  ALTER TABLE teams DROP COLUMN todo_url;
-END;
-
-
 -- https://github.com/gratipay/gratipay.com/pull/4164
 ALTER TABLE packages ADD COLUMN readme_needs_to_be_processed bool NOT NULL DEFAULT true;
 
