@@ -7,8 +7,8 @@ import random
 from gratipay import wireup
 
 
-def main(_print=print, _argv=sys.argv, _input=raw_input):
-    """This is a script to send global site notification emails.
+def main(_argv=sys.argv, _input=raw_input, _print=print):
+    """This is a script to enqueue global site notification emails.
 
     It should only be used for important transactional messages like a Terms of
     Service change. Process:
@@ -20,7 +20,8 @@ def main(_print=print, _argv=sys.argv, _input=raw_input):
             - `heroku run bash`
             - `bin/send-branch-email.py username`           # final test from production
             - `bin/send-branch-email.py all 2> queued.log`  # !!!
-            - make a commit to master to remove branch.spt
+            - make a commit to master to empty branch.spt
+              (leave an empty file [but with speclines] or tests will fail)
             - push to GitHub
 
     """
@@ -55,12 +56,14 @@ def main(_print=print, _argv=sys.argv, _input=raw_input):
                AND is_suspicious is not true
         """)
     else:
+        _print("Okay, just {}.".format(username))
         participants = db.all("SELECT p.*::participants FROM participants p "
-                              "WHERE p.username=%s", username)
+                              "WHERE p.username=%s", (username,))
 
     N = len(participants)
     _print(N)
-    _print([(p.username, p.email_address) for p in random.sample(participants, 5 if N > 5 else 1)])
+    for p in random.sample(participants, 5 if N > 5 else 1) if N else []:
+        _print("spotcheck: {} ({}={})".format(p.email_address, p.username, p.id))
 
 
     # Send emails.
@@ -70,7 +73,7 @@ def main(_print=print, _argv=sys.argv, _input=raw_input):
         prompt("But really actually tho? I mean, ... seriously?")
 
     for p in participants:
-        _print( "Queuing for {} ({}={}).".format(p.email_address, p.username, p.id)
+        _print( "queuing for {} ({}={})".format(p.email_address, p.username, p.id)
               , file=sys.stderr
                )
         p.queue_email('branch', include_unsubscribe=False)

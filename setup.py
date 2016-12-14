@@ -10,7 +10,7 @@ setup( name='gratipay'
                       : [ 'payday=gratipay.cli:payday'
                         , 'fake_data=gratipay.utils.fake_data:main'
                         , 'sync-npm=gratipay.sync_npm.cli:main'
-                        , 'send-branch-email=gratipay.utils.emails.send_branch_email:main'
+                        , 'queue-branch-email=gratipay.utils.emails.queue_branch_email:main'
                          ]
                        }
       )
